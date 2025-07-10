@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -24,18 +24,10 @@ const formSchema = z.object({
   contextLine: z.string().min(10, { message: 'Context must be at least 10 characters.' }),
 });
 
-const INITIAL_HISTORY = [
-    { id: 'initial-1', timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), inputs: { name: 'Elon Musk', role: 'CEO', contextLine: 'Saw your work on reusable rockets' }, generatedReplies: ['Hey Elon, impressive work on those rockets...'] },
-    { id: 'initial-2', timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), inputs: { name: 'Satya Nadella', role: 'CEO of Microsoft', contextLine: 'Loved your vision on AI' }, generatedReplies: ['Hi Satya, your perspective on AI is inspiring...'] },
-];
-
 const getInitialUsage = () => {
     if (typeof window !== 'undefined') {
         const storedUsage = localStorage.getItem('replyRocketUsageLeft');
-        if (storedUsage !== null) {
-            return JSON.parse(storedUsage);
-        }
-        localStorage.setItem('replyRocketUsageLeft', JSON.stringify(3));
+        return storedUsage ? parseInt(storedUsage, 10) : 3;
     }
     return 3;
 };
@@ -44,25 +36,27 @@ const getInitialHistory = () => {
     if (typeof window !== 'undefined') {
         const storedHistory = localStorage.getItem('replyRocketHistory');
         if (storedHistory) {
-            return JSON.parse(storedHistory);
+            try {
+                return JSON.parse(storedHistory);
+            } catch (error) {
+                console.error("Failed to parse history from localStorage", error);
+                return [];
+            }
         }
-        localStorage.setItem('replyRocketHistory', JSON.stringify(INITIAL_HISTORY));
     }
-    return INITIAL_HISTORY;
+    return [];
 };
-
 
 export default function DashboardPage() {
   const { user } = useUser();
   const { toast } = useToast();
   const [generatedReplies, setGeneratedReplies] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [usageLeft, setUsageLeft] = useState(getInitialUsage);
-  const [history, setHistory] = useState(getInitialHistory);
+  const [usageLeft, setUsageLeft] = useState(3);
+  const [history, setHistory] = useState<any[]>([]);
   const [isPro, setIsPro] = useState(false);
 
   useEffect(() => {
-    // Synchronize state with localStorage on mount if it hasn't been initialized yet.
     setUsageLeft(getInitialUsage());
     setHistory(getInitialHistory());
   }, []);
@@ -98,7 +92,7 @@ export default function DashboardPage() {
       if (!isPro) {
         const newUsageLeft = usageLeft - 1;
         setUsageLeft(newUsageLeft);
-        localStorage.setItem('replyRocketUsageLeft', JSON.stringify(newUsageLeft));
+        localStorage.setItem('replyRocketUsageLeft', newUsageLeft.toString());
       }
     } catch (error) {
       console.error(error);
@@ -113,6 +107,7 @@ export default function DashboardPage() {
     toast({ title: "Copied!", description: "Message copied to clipboard." });
   };
 
+  const recentHistory = useMemo(() => history.slice(0, 5), [history]);
 
   return (
     <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-8">
@@ -221,7 +216,7 @@ export default function DashboardPage() {
               <CardContent>
                   <ScrollArea className="h-60">
                       <div className="space-y-4">
-                          {history.slice(0, 5).map(item => (
+                          {recentHistory.map(item => (
                               <div key={item.id} className="text-xs p-2 border rounded-md bg-muted/20">
                                   <p className="font-semibold truncate">{item.inputs.name}, {item.inputs.role}</p>
                                   <p className="text-muted-foreground truncate">{item.inputs.contextLine}</p>
