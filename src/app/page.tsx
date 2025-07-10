@@ -22,15 +22,15 @@ const Header = () => (
 );
 
 const HeroSection = () => (
-  <section className="bg-card py-20 md:py-32">
+  <section className="bg-primary text-primary-foreground py-20 md:py-32">
     <div className="container mx-auto text-center px-4 md:px-6">
-      <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-primary-foreground">
+      <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
         Send better cold outreach.
       </h1>
       <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-primary-foreground/80">
         ReplyRocket uses AI to craft personalized messages that get replies. Stop guessing, start converting.
       </p>
-      <Button size="lg" className="mt-8" asChild>
+      <Button size="lg" className="mt-8 bg-primary-foreground text-primary hover:bg-primary-foreground/90" asChild>
         <Link href="/sign-up">Try Free</Link>
       </Button>
     </div>
@@ -57,7 +57,7 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-24">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 md:px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center">
           The Future of Outreach is Here
@@ -67,7 +67,7 @@ const FeaturesSection = () => {
         </p>
         <div className="mt-12 grid gap-8 md:grid-cols-3">
           {features.map((feature, index) => (
-            <Card key={index}>
+            <Card key={index} className="bg-card">
               <CardHeader className="items-center">
                 {feature.icon}
                 <CardTitle>{feature.title}</CardTitle>
@@ -110,24 +110,24 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="bg-card py-16 md:py-24">
+    <section className="bg-primary text-primary-foreground py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-primary-foreground">
+        <h2 className="text-3xl md:text-4xl font-bold text-center">
           Loved by Sales Teams Worldwide
         </h2>
         <div className="mt-12 grid gap-8 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="bg-background">
+            <Card key={index} className="bg-primary-foreground/10 backdrop-blur-sm border-primary-foreground/20">
               <CardContent className="pt-6">
-                <p className="italic text-muted-foreground">"{testimonial.testimonial}"</p>
+                <p className="italic text-primary-foreground/80">"{testimonial.testimonial}"</p>
                 <div className="mt-4 flex items-center gap-4">
                   <Avatar>
                     <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.aiHint} />
                     <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    <p className="font-semibold text-primary-foreground">{testimonial.name}</p>
+                    <p className="text-sm text-primary-foreground/80">{testimonial.role}</p>
                   </div>
                 </div>
               </CardContent>
@@ -140,7 +140,7 @@ const TestimonialsSection = () => {
 };
 
 const Footer = () => (
-  <footer className="py-8">
+  <footer className="py-8 bg-background">
     <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between">
       <AppLogo />
       <div className="flex gap-4 mt-4 md:mt-0">
