@@ -29,31 +29,42 @@ const INITIAL_HISTORY = [
     { id: 'initial-2', timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), inputs: { name: 'Satya Nadella', role: 'CEO of Microsoft', contextLine: 'Loved your vision on AI' }, generatedReplies: ['Hi Satya, your perspective on AI is inspiring...'] },
 ];
 
+const getInitialUsage = () => {
+    if (typeof window !== 'undefined') {
+        const storedUsage = localStorage.getItem('replyRocketUsageLeft');
+        if (storedUsage !== null) {
+            return JSON.parse(storedUsage);
+        }
+        localStorage.setItem('replyRocketUsageLeft', JSON.stringify(3));
+    }
+    return 3;
+};
+
+const getInitialHistory = () => {
+    if (typeof window !== 'undefined') {
+        const storedHistory = localStorage.getItem('replyRocketHistory');
+        if (storedHistory) {
+            return JSON.parse(storedHistory);
+        }
+        localStorage.setItem('replyRocketHistory', JSON.stringify(INITIAL_HISTORY));
+    }
+    return INITIAL_HISTORY;
+};
+
+
 export default function DashboardPage() {
   const { user } = useUser();
   const { toast } = useToast();
   const [generatedReplies, setGeneratedReplies] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [usageLeft, setUsageLeft] = useState(3);
-  const [history, setHistory] = useState<any[]>([]);
+  const [usageLeft, setUsageLeft] = useState(getInitialUsage);
+  const [history, setHistory] = useState(getInitialHistory);
   const [isPro, setIsPro] = useState(false);
 
   useEffect(() => {
-    const storedHistory = localStorage.getItem('replyRocketHistory');
-    if (storedHistory) {
-      setHistory(JSON.parse(storedHistory));
-    } else {
-      localStorage.setItem('replyRocketHistory', JSON.stringify(INITIAL_HISTORY));
-      setHistory(INITIAL_HISTORY);
-    }
-
-    const storedUsage = localStorage.getItem('replyRocketUsageLeft');
-    if (storedUsage !== null) {
-      setUsageLeft(JSON.parse(storedUsage));
-    } else {
-      localStorage.setItem('replyRocketUsageLeft', JSON.stringify(3));
-      setUsageLeft(3);
-    }
+    // Synchronize state with localStorage on mount if it hasn't been initialized yet.
+    setUsageLeft(getInitialUsage());
+    setHistory(getInitialHistory());
   }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
