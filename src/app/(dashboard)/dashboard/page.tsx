@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -42,7 +43,16 @@ export default function DashboardPage() {
     if (storedHistory) {
       setHistory(JSON.parse(storedHistory));
     } else {
+      localStorage.setItem('replyRocketHistory', JSON.stringify(INITIAL_HISTORY));
       setHistory(INITIAL_HISTORY);
+    }
+
+    const storedUsage = localStorage.getItem('replyRocketUsageLeft');
+    if (storedUsage !== null) {
+      setUsageLeft(JSON.parse(storedUsage));
+    } else {
+      localStorage.setItem('replyRocketUsageLeft', JSON.stringify(3));
+      setUsageLeft(3);
     }
   }, []);
 
@@ -75,7 +85,9 @@ export default function DashboardPage() {
       localStorage.setItem('replyRocketHistory', JSON.stringify(updatedHistory));
 
       if (!isPro) {
-        setUsageLeft(prev => prev - 1);
+        const newUsageLeft = usageLeft - 1;
+        setUsageLeft(newUsageLeft);
+        localStorage.setItem('replyRocketUsageLeft', JSON.stringify(newUsageLeft));
       }
     } catch (error) {
       console.error(error);
