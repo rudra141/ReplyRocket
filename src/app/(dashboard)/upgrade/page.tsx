@@ -22,7 +22,7 @@ export default function UpgradePage() {
     const handlePayment = () => {
         const options = {
             key: RAZORPAY_KEY_ID,
-            amount: "49900", // amount in the smallest currency unit
+            amount: "1900", // amount in the smallest currency unit
             currency: "INR",
             name: "ReplyRocket Pro",
             description: "Monthly Subscription",
@@ -73,7 +73,7 @@ export default function UpgradePage() {
                     </CardHeader>
                     <CardContent className="space-y-6">
                         <div className="text-center">
-                            <span className="text-4xl font-bold">₹499</span>
+                            <span className="text-4xl font-bold">₹19</span>
                             <span className="text-muted-foreground">/month</span>
                         </div>
                         <ul className="space-y-3">

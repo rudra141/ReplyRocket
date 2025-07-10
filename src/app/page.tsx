@@ -218,7 +218,7 @@ const PricingSection = () => (
           </CardHeader>
           <CardContent className="space-y-4">
              <div className="flex items-baseline">
-              <span className="text-4xl font-bold">₹499</span>
+              <span className="text-4xl font-bold">₹19</span>
               <span className="text-muted-foreground ml-1">/month</span>
             </div>
              <ul className="space-y-2 text-muted-foreground">
