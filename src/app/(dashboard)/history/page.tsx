@@ -21,7 +21,7 @@ import {
 const MOCK_GENERATIONS = [
   {
     id: 'gen1',
-    timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+    timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
     inputs: { name: 'Elon Musk', role: 'CEO, SpaceX', contextLine: 'Saw your work on reusable rockets, truly revolutionary.' },
     generatedReplies: [
         'Hey Elon, your work with SpaceX is inspiring. The reusable rockets are a game-changer.',
@@ -30,7 +30,7 @@ const MOCK_GENERATIONS = [
   },
   {
     id: 'gen2',
-    timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+    timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
     inputs: { name: 'Satya Nadella', role: 'CEO, Microsoft', contextLine: 'Loved your keynote on the future of AI at the recent conference.' },
     generatedReplies: [
         'Hi Satya, your vision for AI presented at the conference was profoundly insightful.',
@@ -39,7 +39,7 @@ const MOCK_GENERATIONS = [
   },
   {
     id: 'gen3',
-    timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+    timestamp: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
     inputs: { name: 'Ada Lovelace', role: 'Visionary', contextLine: 'Your work on the Analytical Engine laid the groundwork for modern computing.' },
     generatedReplies: [
         'Dear Ada, your contributions to computing are timeless and continue to inspire generations.',
@@ -83,7 +83,7 @@ export default function HistoryPage() {
                       <span className="font-semibold">{gen.inputs.name}</span>
                       <span className="text-muted-foreground"> - {gen.inputs.role}</span>
                     </div>
-                    <span className='text-sm text-muted-foreground'>{gen.timestamp.toLocaleDateString()}</span>
+                    <span className='text-sm text-muted-foreground'>{new Date(gen.timestamp).toLocaleDateString()}</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent>

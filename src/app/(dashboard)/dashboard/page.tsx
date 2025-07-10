@@ -23,10 +23,7 @@ const formSchema = z.object({
   contextLine: z.string().min(10, { message: 'Context must be at least 10 characters.' }),
 });
 
-// Mock data, assuming fetched from Firestore
-const MOCK_USAGE_TODAY = 3; // 5 total, 2 used
-const MOCK_IS_PRO = false;
-const MOCK_HISTORY = [
+const INITIAL_HISTORY = [
     { id: 1, input: { name: 'Elon Musk', role: 'CEO', contextLine: 'Saw your work on reusable rockets' }, output: ['Hey Elon, impressive work on those rockets...'] },
     { id: 2, input: { name: 'Satya Nadella', role: 'CEO of Microsoft', contextLine: 'Loved your vision on AI' }, output: ['Hi Satya, your perspective on AI is inspiring...'] },
 ];
@@ -36,7 +33,9 @@ export default function DashboardPage() {
   const { toast } = useToast();
   const [generatedReplies, setGeneratedReplies] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [usageLeft, setUsageLeft] = useState(MOCK_USAGE_TODAY);
+  const [usageLeft, setUsageLeft] = useState(3);
+  const [history, setHistory] = useState(INITIAL_HISTORY);
+  const [isPro, setIsPro] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,7 +43,7 @@ export default function DashboardPage() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!MOCK_IS_PRO && usageLeft <= 0) {
+    if (!isPro && usageLeft <= 0) {
         toast({ title: 'Free Limit Reached', description: 'Please upgrade to Pro for unlimited generations.', variant: 'destructive' });
         return;
     }
@@ -54,9 +53,16 @@ export default function DashboardPage() {
     try {
       const result = await generateReplies(values as GenerateRepliesInput);
       setGeneratedReplies(result.replies);
-      if (!MOCK_IS_PRO) {
+      
+      const newHistoryItem = {
+        id: history.length + 1,
+        input: values,
+        output: result.replies,
+      };
+      setHistory(prev => [newHistoryItem, ...prev]);
+
+      if (!isPro) {
         setUsageLeft(prev => prev - 1);
-        // In a real app, you would update this value in Firestore.
       }
     } catch (error) {
       console.error(error);
@@ -106,7 +112,7 @@ export default function DashboardPage() {
                 )} />
               </CardContent>
               <CardFooter>
-                 <Button type="submit" disabled={isLoading || (!MOCK_IS_PRO && usageLeft <= 0)}>
+                 <Button type="submit" disabled={isLoading || (!isPro && usageLeft <= 0)}>
                   {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                   Generate Replies
                 </Button>
@@ -115,7 +121,7 @@ export default function DashboardPage() {
           </Form>
         </Card>
 
-        {(!MOCK_IS_PRO && usageLeft <= 0) && (
+        {(!isPro && usageLeft <= 0) && (
             <Card className="bg-primary/10 border-primary">
                  <CardHeader>
                     <CardTitle className="flex items-center gap-2"><Gem className="text-primary"/> Free Limit Reached</CardTitle>
@@ -164,7 +170,7 @@ export default function DashboardPage() {
                   <CardTitle>Usage</CardTitle>
               </CardHeader>
               <CardContent>
-                  {MOCK_IS_PRO ? (
+                  {isPro ? (
                        <p className="font-bold text-primary">Pro Plan</p>
                   ) : (
                       <p><span className="font-bold">{usageLeft}</span> free generations left today.</p>
@@ -179,7 +185,7 @@ export default function DashboardPage() {
               <CardContent>
                   <ScrollArea className="h-60">
                       <div className="space-y-4">
-                          {MOCK_HISTORY.map(item => (
+                          {history.map(item => (
                               <div key={item.id} className="text-xs p-2 border rounded-md bg-muted/20">
                                   <p className="font-semibold truncate">{item.input.name}, {item.input.role}</p>
                                   <p className="text-muted-foreground truncate">{item.input.contextLine}</p>
