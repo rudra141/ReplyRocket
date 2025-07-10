@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -24,8 +24,8 @@ const formSchema = z.object({
 });
 
 const INITIAL_HISTORY = [
-    { id: 1, input: { name: 'Elon Musk', role: 'CEO', contextLine: 'Saw your work on reusable rockets' }, output: ['Hey Elon, impressive work on those rockets...'] },
-    { id: 2, input: { name: 'Satya Nadella', role: 'CEO of Microsoft', contextLine: 'Loved your vision on AI' }, output: ['Hi Satya, your perspective on AI is inspiring...'] },
+    { id: 'initial-1', timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), inputs: { name: 'Elon Musk', role: 'CEO', contextLine: 'Saw your work on reusable rockets' }, generatedReplies: ['Hey Elon, impressive work on those rockets...'] },
+    { id: 'initial-2', timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), inputs: { name: 'Satya Nadella', role: 'CEO of Microsoft', contextLine: 'Loved your vision on AI' }, generatedReplies: ['Hi Satya, your perspective on AI is inspiring...'] },
 ];
 
 export default function DashboardPage() {
@@ -34,8 +34,17 @@ export default function DashboardPage() {
   const [generatedReplies, setGeneratedReplies] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [usageLeft, setUsageLeft] = useState(3);
-  const [history, setHistory] = useState(INITIAL_HISTORY);
+  const [history, setHistory] = useState<any[]>([]);
   const [isPro, setIsPro] = useState(false);
+
+  useEffect(() => {
+    const storedHistory = localStorage.getItem('replyRocketHistory');
+    if (storedHistory) {
+      setHistory(JSON.parse(storedHistory));
+    } else {
+      setHistory(INITIAL_HISTORY);
+    }
+  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,11 +64,15 @@ export default function DashboardPage() {
       setGeneratedReplies(result.replies);
       
       const newHistoryItem = {
-        id: history.length + 1,
-        input: values,
-        output: result.replies,
+        id: `gen-${Date.now()}`,
+        timestamp: new Date().toISOString(),
+        inputs: values,
+        generatedReplies: result.replies,
       };
-      setHistory(prev => [newHistoryItem, ...prev]);
+      
+      const updatedHistory = [newHistoryItem, ...history];
+      setHistory(updatedHistory);
+      localStorage.setItem('replyRocketHistory', JSON.stringify(updatedHistory));
 
       if (!isPro) {
         setUsageLeft(prev => prev - 1);
@@ -185,10 +198,10 @@ export default function DashboardPage() {
               <CardContent>
                   <ScrollArea className="h-60">
                       <div className="space-y-4">
-                          {history.map(item => (
+                          {history.slice(0, 5).map(item => (
                               <div key={item.id} className="text-xs p-2 border rounded-md bg-muted/20">
-                                  <p className="font-semibold truncate">{item.input.name}, {item.input.role}</p>
-                                  <p className="text-muted-foreground truncate">{item.input.contextLine}</p>
+                                  <p className="font-semibold truncate">{item.inputs.name}, {item.inputs.role}</p>
+                                  <p className="text-muted-foreground truncate">{item.inputs.contextLine}</p>
                               </div>
                           ))}
                       </div>

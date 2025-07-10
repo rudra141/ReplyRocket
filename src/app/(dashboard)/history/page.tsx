@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -17,8 +17,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
-// Mock data, assuming fetched from Firestore
-const MOCK_GENERATIONS = [
+const INITIAL_HISTORY = [
   {
     id: 'gen1',
     timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
@@ -48,9 +47,29 @@ const MOCK_GENERATIONS = [
   }
 ];
 
+// This component is only rendered on the client, so we can use useEffect
+const ClientOnlyDate = ({ timestamp }: { timestamp: string }) => {
+    const [dateString, setDateString] = useState('');
+    useEffect(() => {
+        setDateString(new Date(timestamp).toLocaleDateString());
+    }, [timestamp]);
+
+    return <span className='text-sm text-muted-foreground'>{dateString}</span>;
+}
+
+
 export default function HistoryPage() {
   const { toast } = useToast();
-  const [generations, setGenerations] = useState(MOCK_GENERATIONS);
+  const [generations, setGenerations] = useState<any[]>([]);
+  
+  useEffect(() => {
+    const storedHistory = localStorage.getItem('replyRocketHistory');
+    if (storedHistory) {
+      setGenerations(JSON.parse(storedHistory));
+    } else {
+        setGenerations(INITIAL_HISTORY);
+    }
+  }, []);
   
   const copyAllToClipboard = (replies: string[]) => {
     const textToCopy = replies.join('\n\n---\n\n');
@@ -59,8 +78,9 @@ export default function HistoryPage() {
   };
 
   const deleteGeneration = (id: string) => {
-    // In a real app, you would call a server action to delete from Firestore
-    setGenerations(prev => prev.filter(gen => gen.id !== id));
+    const updatedGenerations = generations.filter(gen => gen.id !== id);
+    setGenerations(updatedGenerations);
+    localStorage.setItem('replyRocketHistory', JSON.stringify(updatedGenerations));
     toast({ title: "Deleted", description: "Generation has been deleted." });
   }
 
@@ -83,7 +103,7 @@ export default function HistoryPage() {
                       <span className="font-semibold">{gen.inputs.name}</span>
                       <span className="text-muted-foreground"> - {gen.inputs.role}</span>
                     </div>
-                    <span className='text-sm text-muted-foreground'>{new Date(gen.timestamp).toLocaleDateString()}</span>
+                    <ClientOnlyDate timestamp={gen.timestamp} />
                   </div>
                 </AccordionTrigger>
                 <AccordionContent>
