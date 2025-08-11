@@ -20,7 +20,7 @@
 
 | Home Page | Reply Suggestions | 
 |-----------|-------------------|
-| https://github.com/rudra141/ReplyRocket/issues/2#issue-3309775930 | https://github.com/rudra141/ReplyRocket/issues/4#issue-3309792878 |  
+|> https://github.com/rudra141/ReplyRocket/issues/2#issue-3309775930 | > https://github.com/rudra141/ReplyRocket/issues/4#issue-3309792878 |  
 
 ---
 
