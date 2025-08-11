@@ -20,7 +20,7 @@
 
 | Home Page | Reply Suggestions | 
 |-----------|-------------------|
-|> https://github.com/rudra141/ReplyRocket/issues/2#issue-3309775930 | > https://github.com/rudra141/ReplyRocket/issues/4#issue-3309792878 |  
+|> <img width="1470" height="832" alt="Image" src="https://github.com/user-attachments/assets/3b33391e-4cd7-4755-aa0d-4d2923f43f0a" /> | > <img width="1470" height="832" alt="Image" src="https://github.com/user-attachments/assets/2c87ded0-996e-4e52-acb7-53df5a19e8c6" /> |  
 
 ---
 
