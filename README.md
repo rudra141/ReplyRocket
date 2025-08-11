@@ -74,3 +74,49 @@ ReplyRocket is built with **shadcn/ui**, powered by **Tailwind CSS** and **Radix
 ```bash
 git clone https://github.com/rudra141/ReplyRocket.git
 cd ReplyRocket
+
+2️⃣ Install Dependencies
+bash
+Copy
+Edit
+npm install
+3️⃣ Run Locally
+bash
+Copy
+Edit
+firebase emulators:start
+or
+
+bash
+Copy
+Edit
+npm run dev
+4️⃣ Deploy to Firebase
+bash
+Copy
+Edit
+firebase deploy
+🖼 Screenshots
+(Add some screenshots of the UI here)
+
+📜 License
+This project is licensed under the MIT License – feel free to use, modify, and share.
+
+🤝 Contributing
+We welcome contributions!
+
+Fork this repository
+
+Create your feature branch (git checkout -b feature/YourFeature)
+
+Commit your changes (git commit -m 'Add new feature')
+
+Push to the branch (git push origin feature/YourFeature)
+
+Open a Pull Request
+
+📬 Contact
+👤 Your Name
+📧 youremail@example.com
+🔗 GitHub Profile
+🔗 LinkedIn
