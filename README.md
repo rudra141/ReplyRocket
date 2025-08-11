@@ -12,7 +12,7 @@
 ## 📽 Project Demo
 
 🎥 **Video Testimonial / Walkthrough**  
-> [https://github.com/user-attachments/assets/3b2a5afd-a472-4fb4-9a4f-fd033870f1aa]
+> https://github.com/user-attachments/assets/3b2a5afd-a472-4fb4-9a4f-fd033870f1aa
 
 ---
 
@@ -20,7 +20,7 @@
 
 | Home Page | Reply Suggestions | 
 |-----------|-------------------|
-| ![https://github.com/rudra141/ReplyRocket/issues/2#issue-3309775930] | ![https://github.com/rudra141/ReplyRocket/issues/4#issue-3309792878] |  
+| https://github.com/rudra141/ReplyRocket/issues/2#issue-3309775930 | https://github.com/rudra141/ReplyRocket/issues/4#issue-3309792878 |  
 
 ---
 
