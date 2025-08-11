@@ -88,7 +88,6 @@ Push to the branch (git push origin feature/YourFeature)
 Open a Pull Request
 
 ### 📬 Contact
-👤 Your Name
-📧 youremail@example.com
-🔗 GitHub Profile
-🔗 LinkedIn
+#### 👤 Rudra Ranjan
+#### 📧 rudraranjan26@gmail.com
+#### 🔗 https://www.linkedin.com/in/rudraranjan/
