@@ -12,15 +12,15 @@
 ## 📽 Project Demo
 
 🎥 **Video Testimonial / Walkthrough**  
-> *(Add your YouTube or Loom video link here — a quick 1–2 min video showcasing ReplyRocket’s features in action.)*
+> [https://github.com/user-attachments/assets/3b2a5afd-a472-4fb4-9a4f-fd033870f1aa]
 
 ---
 
 ## 🖼 Screenshots
 
-| Home Page | Reply Suggestions | Tone Adjustment |
-|-----------|-------------------|-----------------|
-| ![Home Page](./screenshots/home.png) | ![Suggestions](./screenshots/suggestions.png) | ![Tone Adjustment](./screenshots/tone.png) |
+| Home Page | Reply Suggestions | 
+|-----------|-------------------|
+| ![https://github.com/rudra141/ReplyRocket/issues/2#issue-3309775930] | ![https://github.com/rudra141/ReplyRocket/issues/4#issue-3309792878] |  
 
 ---
 
@@ -67,9 +67,6 @@ ReplyRocket is built with **shadcn/ui**, powered by **Tailwind CSS** and **Radix
 - **Deployment:** Firebase Hosting
 
 ---
-
-## 🖼 Screenshots
-(Add some screenshots of the UI here)
 
 ## 📜 License
 This project is licensed under the MIT License – feel free to use, modify, and share.
