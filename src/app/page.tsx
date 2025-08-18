@@ -1,18 +1,17 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { AppLogo } from "@/components/AppLogo";
-import { Check, CheckCircle, MoveRight } from "lucide-react";
-import Image from "next/image";
+import { MoveRight } from "lucide-react";
 import dynamic from 'next/dynamic';
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 const FeaturesSection = dynamic(() => import('@/components/FeaturesSection'));
 const TestimonialsSection = dynamic(() => import('@/components/TestimonialsSection'));
 const PricingSection = dynamic(() => import('@/components/PricingSection'));
 
 
-const Header = () => (
+const Header = ({ isSignedIn }: { isSignedIn: boolean }) => (
   <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm">
     <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
       <AppLogo />
@@ -22,12 +21,20 @@ const Header = () => (
         <Link href="#pricing" className="text-sm font-medium hover:underline underline-offset-4">Pricing</Link>
       </nav>
       <div className="flex items-center gap-4">
-        <Button variant="ghost" asChild>
-          <Link href="/login">Login</Link>
-        </Button>
-        <Button asChild>
-          <Link href="/sign-up">Get Started Free</Link>
-        </Button>
+        {isSignedIn ? (
+            <Button asChild>
+              <Link href="/dashboard">Dashboard</Link>
+            </Button>
+        ) : (
+          <>
+            <Button variant="ghost" asChild>
+              <Link href="/login">Login</Link>
+            </Button>
+            <Button asChild>
+              <Link href="/sign-up">Get Started Free</Link>
+            </Button>
+          </>
+        )}
       </div>
     </div>
   </header>
@@ -70,9 +77,17 @@ const Footer = () => (
 
 
 export default function Home() {
+  const { userId } = auth();
+
+  if (userId) {
+    // If the user is logged in, redirect them to the dashboard.
+    // This is a common pattern for marketing pages.
+    // redirect('/dashboard');
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <Header />
+      <Header isSignedIn={!!userId} />
       <main className="flex-1">
         <HeroSection />
         <FeaturesSection />
