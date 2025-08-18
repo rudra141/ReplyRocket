@@ -7,7 +7,6 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 const FeaturesSection = dynamic(() => import('@/components/FeaturesSection'));
-const TestimonialsSection = dynamic(() => import('@/components/TestimonialsSection'));
 const PricingSection = dynamic(() => import('@/components/PricingSection'));
 
 
@@ -17,7 +16,6 @@ const Header = ({ isSignedIn }: { isSignedIn: boolean }) => (
       <AppLogo />
       <nav className="hidden items-center gap-6 md:flex">
         <Link href="#features" className="text-sm font-medium hover:underline underline-offset-4">Features</Link>
-        <Link href="#testimonials" className="text-sm font-medium hover:underline underline-offset-4">Testimonials</Link>
         <Link href="#pricing" className="text-sm font-medium hover:underline underline-offset-4">Pricing</Link>
       </nav>
       <div className="flex items-center gap-4">
@@ -91,7 +89,6 @@ export default function Home() {
       <main className="flex-1">
         <HeroSection />
         <FeaturesSection />
-        <TestimonialsSection />
         <PricingSection />
       </main>
       <Footer />
