@@ -7,7 +7,6 @@ import { auth } from "@clerk/nextjs/server";
 
 const FeaturesSection = dynamic(() => import('@/components/FeaturesSection'));
 const ProductDemoSection = dynamic(() => import('@/components/ProductDemoSection'));
-const PricingSection = dynamic(() => import('@/components/PricingSection'));
 
 
 const Header = ({ isSignedIn }: { isSignedIn: boolean }) => (
@@ -16,7 +15,6 @@ const Header = ({ isSignedIn }: { isSignedIn: boolean }) => (
       <AppLogo />
       <nav className="hidden items-center gap-6 md:flex">
         <Link href="#features" className="text-sm font-medium hover:underline underline-offset-4">Features</Link>
-        <Link href="#pricing" className="text-sm font-medium hover:underline underline-offset-4">Pricing</Link>
       </nav>
       <div className="flex items-center gap-4">
         {isSignedIn ? (
@@ -82,7 +80,6 @@ export default function Home() {
         <HeroSection />
         <ProductDemoSection />
         <FeaturesSection />
-        <PricingSection />
       </main>
       <Footer />
     </div>
