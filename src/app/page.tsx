@@ -4,7 +4,6 @@ import { AppLogo } from "@/components/AppLogo";
 import { MoveRight } from "lucide-react";
 import dynamic from 'next/dynamic';
 import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 
 const FeaturesSection = dynamic(() => import('@/components/FeaturesSection'));
 const ProductDemoSection = dynamic(() => import('@/components/ProductDemoSection'));
@@ -75,12 +74,6 @@ const Footer = () => (
 
 export default function Home() {
   const { userId } = auth();
-
-  if (userId) {
-    // If the user is logged in, redirect them to the dashboard.
-    // This is a common pattern for marketing pages.
-    redirect('/dashboard');
-  }
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
