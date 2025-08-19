@@ -1,7 +1,5 @@
 'use client';
 
-import { Stars } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
 import React, { useEffect } from "react";
 import {
   useMotionTemplate,
@@ -33,14 +31,9 @@ export const AuroraHero = ({ children }: { children: React.ReactNode }) => {
       }}
       className="relative overflow-hidden bg-gray-950 text-gray-200"
     >
-        <div className="relative z-10">
-            {children}
-        </div>
-        <div className="absolute inset-0 z-0">
-            <Canvas>
-            <Stars radius={50} count={2500} factor={4} fade speed={2} />
-            </Canvas>
-        </div>
+      <div className="relative z-10">
+          {children}
+      </div>
     </motion.section>
   );
 };
