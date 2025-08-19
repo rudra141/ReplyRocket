@@ -7,8 +7,8 @@ import dynamic from 'next/dynamic';
 import React from "react";
 import { FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
-import { AuroraHero } from "@/components/AuroraHero";
 
+const AuroraHero = dynamic(() => import('@/components/AuroraHero').then(mod => mod.AuroraHero), { ssr: false });
 const FeaturesSection = dynamic(() => import('@/components/FeaturesSection'));
 const ProductDemoSection = dynamic(() => import('@/components/ProductDemoSection'));
 
@@ -77,7 +77,7 @@ export function HomeClient({ isSignedIn }: { isSignedIn: boolean }) {
                   whileTap={{
                       scale: 0.985,
                   }}
-                  className="group relative flex w-fit items-center gap-1.5 rounded-full bg-gray-950/10 px-4 py-2 text-gray-50 transition-colors hover:bg-gray-950/50 border border-white/30"
+                  className="group relative flex w-fit items-center gap-1.5 rounded-full bg-gray-950/10 px-4 py-2 text-gray-50 transition-colors hover:bg-gray-950/50 border border-white/50 shadow-[0_0_15px_hsl(var(--primary)/0.5)]"
                   >
                   Start free trial
                   <FiArrowRight className="transition-transform group-hover:-rotate-45 group-active:-rotate-12" />
