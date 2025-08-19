@@ -1,8 +1,8 @@
-
 'use client';
 
 import React, { useEffect } from 'react';
 import { useMotionTemplate, useMotionValue, motion, animate } from 'framer-motion';
+import Starfield from './Starfield';
 
 const COLORS_TOP = ['#13FFAA', '#1E67C6', '#CE84CF', '#DD335C'];
 
@@ -27,6 +27,7 @@ export const AuroraHero = ({ children }: { children: React.ReactNode }) => {
       }}
       className="relative overflow-hidden bg-gray-950 text-gray-200"
     >
+      <Starfield />
       <div className="relative z-10">{children}</div>
     </motion.section>
   );

@@ -56,3 +56,42 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Starfield styles */
+.starfield-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.star-sm, .star-md, .star-lg {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle linear infinite;
+}
+
+.star-sm {
+  width: 1px;
+  height: 1px;
+}
+
+.star-md {
+  width: 2px;
+  height: 2px;
+}
+
+.star-lg {
+  width: 3px;
+  height: 3px;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.2; }
+}
