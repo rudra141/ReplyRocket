@@ -9,11 +9,10 @@ import {
   animate,
 } from "framer-motion";
 import Link from "next/link";
-import dynamic from 'next/dynamic';
+import { Stars } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 
 const COLORS_TOP = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
-
-const Starfield = dynamic(() => import('@/components/Starfield').then(mod => mod.Starfield), { ssr: false });
 
 export const AuroraHero = ({ children }: { children?: React.ReactNode }) => {
   const color = useMotionValue(COLORS_TOP[0]);
@@ -25,7 +24,7 @@ export const AuroraHero = ({ children }: { children?: React.ReactNode }) => {
       repeat: Infinity,
       repeatType: "mirror",
     });
-  }, [color]);
+  }, []);
 
   const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
   const border = useMotionTemplate`1px solid ${color}`;
@@ -74,7 +73,11 @@ export const AuroraHero = ({ children }: { children?: React.ReactNode }) => {
         {children}
       </div>
 
-      <Starfield />
+      <div className="absolute inset-0 z-0">
+        <Canvas>
+          <Stars radius={50} count={2500} factor={4} fade speed={2} />
+        </Canvas>
+      </div>
     </motion.section>
   );
 };

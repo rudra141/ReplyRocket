@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Button } from "@/components/ui/button";
@@ -6,10 +5,10 @@ import Link from "next/link";
 import { AppLogo } from "@/components/AppLogo";
 import dynamic from 'next/dynamic';
 import React from "react";
-import { AuroraHero } from "@/components/AuroraHero";
 
 const FeaturesSection = dynamic(() => import('@/components/FeaturesSection'));
 const ProductDemoSection = dynamic(() => import('@/components/ProductDemoSection'));
+const AuroraHero = dynamic(() => import('@/components/AuroraHero').then(mod => mod.AuroraHero), { ssr: false });
 
 const Header = ({ isSignedIn }: { isSignedIn: boolean }) => (
   <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
