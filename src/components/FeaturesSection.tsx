@@ -30,7 +30,7 @@ export default function FeaturesSection() {
                 The Future of Outreach is Here
                 </h2>
                 <p className="mt-4 max-w-2xl mx-auto text-gray-400">
-                Everything you need to supercharge your sales pipeline.
+                Supercharge your outreach in minutes.
                 </p>
             </div>
             <div className="mt-12 grid gap-8 md:grid-cols-3">

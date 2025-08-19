@@ -67,7 +67,7 @@ export function HomeClient({ isSignedIn }: { isSignedIn: boolean }) {
               Stop Guessing. Start Converting.
               </h1>
               <p className="my-6 max-w-xl text-center text-base leading-relaxed md:text-lg md:leading-relaxed">
-              ReplyRocket uses AI to craft personalized outreach messages that actually get replies. Supercharge your sales pipeline in minutes.
+              ReplyRocket uses AI to craft personalized outreach messages that actually get replies. Supercharge your outreach in minutes.
               </p>
               <Link href="/sign-up">
                   <motion.button
