@@ -6,8 +6,8 @@ import Link from "next/link";
 import { AppLogo } from "@/components/AppLogo";
 import dynamic from 'next/dynamic';
 import React from "react";
+import { AuroraHero } from "@/components/AuroraHero";
 
-const AuroraHero = dynamic(() => import('@/components/AuroraHero').then(mod => mod.AuroraHero), { ssr: false });
 const FeaturesSection = dynamic(() => import('@/components/FeaturesSection'));
 const ProductDemoSection = dynamic(() => import('@/components/ProductDemoSection'));
 
