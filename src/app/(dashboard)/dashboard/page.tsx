@@ -27,9 +27,9 @@ const formSchema = z.object({
 const getInitialUsage = () => {
     if (typeof window !== 'undefined') {
         const storedUsage = localStorage.getItem('replyRocketUsageLeft');
-        return storedUsage ? parseInt(storedUsage, 10) : 3;
+        return storedUsage ? parseInt(storedUsage, 10) : 100;
     }
-    return 3;
+    return 100;
 };
 
 const getInitialHistory = () => {
@@ -52,7 +52,7 @@ export default function DashboardPage() {
   const { toast } = useToast();
   const [generatedReplies, setGeneratedReplies] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [usageLeft, setUsageLeft] = useState(3);
+  const [usageLeft, setUsageLeft] = useState(100);
   const [history, setHistory] = useState<any[]>([]);
   const [isPro, setIsPro] = useState(false);
 

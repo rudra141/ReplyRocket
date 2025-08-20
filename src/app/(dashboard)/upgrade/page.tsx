@@ -8,8 +8,6 @@ import { useUser } from "@clerk/nextjs";
 
 const proFeatures = [
     "Unlimited generations",
-    "Save message templates",
-    "Bulk CSV mode",
     "Priority support"
 ];
 
