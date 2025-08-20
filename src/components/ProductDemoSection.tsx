@@ -16,7 +16,7 @@ export default function ProductDemoSection() {
                 <div className="mt-12 max-w-4xl mx-auto">
                     <div className="aspect-video overflow-hidden rounded-2xl border-4 border-gray-700/50 shadow-2xl shadow-black/50">
                         <iframe
-                            src="https://player.vimeo.com/video/1111268877"
+                            src="https://player.vimeo.com/video/1111742386"
                             width="100%"
                             height="100%"
                             frameBorder="0"
