@@ -20,7 +20,7 @@
 
 | Home Page | Reply Suggestions | 
 |-----------|-------------------|
-|> <img width="1470" height="832" alt="Image" src="https://github.com/rudra141/ReplyRocket/issues/2#issue-3339101327" /> | > <img width="1470" height="832" alt="Image" src="https://github.com/rudra141/ReplyRocket/issues/3#issue-3339104889" /> | > <img width="1470" height="832" alt="Image" src="https://github.com/rudra141/ReplyRocket/issues/4#issue-3339109054" /> |
+|> <img width="1470" height="828" alt="Image" src="https://github.com/user-attachments/assets/35797dfd-5810-4ca7-977c-0bfed30c4e38" /> | > <img width="1470" height="829" alt="Image" src="https://github.com/user-attachments/assets/e9d6de9a-c09c-49bb-b821-5430b6bd5127" /> | > <img width="1470" height="826" alt="Image" src="https://github.com/user-attachments/assets/cf3b8af5-4f1d-416d-9931-afb805830a45" /> |
 
 ---
 
