@@ -18,7 +18,7 @@
 
 ## 🖼 Screenshots
 
-| Home Page | Reply Suggestions | 
+| Home Page | Demo Section | Top Features |
 |-----------|-------------------|
 |> <img width="1470" height="828" alt="Image" src="https://github.com/user-attachments/assets/35797dfd-5810-4ca7-977c-0bfed30c4e38" /> | > <img width="1470" height="829" alt="Image" src="https://github.com/user-attachments/assets/e9d6de9a-c09c-49bb-b821-5430b6bd5127" /> | > <img width="1470" height="826" alt="Image" src="https://github.com/user-attachments/assets/cf3b8af5-4f1d-416d-9931-afb805830a45" /> |
 
